@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "162614428808",
+    "project_id": "global-bouf",
+    "storage_bucket": "global-bouf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162614428808:android:a72d9a6b1116ea0d404b3d",
+        "android_client_info": {
+          "package_name": "com.example.recette"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162614428808-uctkn77ugjgpljt8507bubhgpabhliuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxcMRJYQcdydpVXr4br-NPPa8Do0zAjEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162614428808-uctkn77ugjgpljt8507bubhgpabhliuc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
