@@ -1,6 +1,5 @@
 // ignore_for_file: file_names, camel_case_types, prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace, non_constant_identifier_names
 
-
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:recette/Screen/HomeScreen.dart';
@@ -17,7 +16,7 @@ class OnBearScreen extends StatefulWidget {
 }
 
 class _OnBearScreenState extends State<OnBearScreen> {
-  int currentIndex = 0 ;
+  int currentIndex = 0;
   PageController? _controller;
 
   @override
@@ -31,6 +30,7 @@ class _OnBearScreenState extends State<OnBearScreen> {
     _controller!.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,150 +44,152 @@ class _OnBearScreenState extends State<OnBearScreen> {
                 bottom: 84.0,
                 left: 52.0,
                 child: Image.asset("assets/images/smallDot.png"),
-                ),
+              ),
               Positioned(
                 bottom: 32.0,
                 left: 84.0,
                 child: Image.asset("assets/images/mediumDot.png"),
-                ),
-                Align(
-                alignment: Alignment.centerRight,
-                child: Image.asset("assets/images/bigDot.png", height: 430,),
-                ),
-                // Align(
-                // alignment: Alignment.centerLeft,
-                // child: Image.asset("assets/images/femmeombre.png"),
-                // ),
-                Align(
-                alignment: Alignment.center,
-                child: Image.asset("assets/images/beardGround.png",  scale: 0.6,),
-                ),
-              ]
-            ),
-            Container(
-              height: 265.0,
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.only(left: 32, right: 32, bottom: 25),
-              padding:  const EdgeInsets.symmetric(vertical: 15.0),
-              decoration:  BoxDecoration(
-                color: kDarkColor,
-                borderRadius: BorderRadius.circular(50),
-                boxShadow:[ BoxShadow(
-                      offset: Offset(0, 8),
-                      blurRadius: 6.0,
-                    ),
-                   ]
               ),
-              child: Container(
-                
-                child: Column(
-                  children: [
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                            onbeardList.length,
-                            (index) => BuilDot(index, context),
-                    )
-                  ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Image.asset(
+                  "assets/images/bigDot.png",
+                  height: 430,
                 ),
-                    SizedBox(height: 18.0),
-                    Container(
-                      width: double.infinity,
-                      height: 80.0,
-                        child: PageView.builder(
-                          controller: _controller,
-                          itemCount: onbeardList.length,
-                          onPageChanged: (int index) {
-                            setState(() {
-                              currentIndex = index ;
-                            });
-                          },
-                          itemBuilder: (BuildContext context, int index) { 
-                            return Column(
-                            children:[
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  "assets/images/beardGround.png",
+                  scale: 0.6,
+                ),
+              ),
+              Positioned(
+                // MEC TON TRUCK NE MARCHAIT PAS SUR MON LALE DONC J'AI DU REPOSITIONNER(c'etait trop en bas il y avait erreur RenderFlex overflowed )
+                // donc c'est pas bien placer faut revoir xa
+                // bottom: 10,
+                child: Container(
+                  height: 265.0,
+                  width: MediaQuery.of(context).size.width,
+                  margin:
+                      const EdgeInsets.only(left: 32, right: 32, bottom: 25),
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  decoration: BoxDecoration(
+                      color: kDarkColor,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 8),
+                          blurRadius: 6.0,
+                        ),
+                      ]),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(
+                                onbeardList.length,
+                                (index) => builDot(index, context),
+                              )),
+                        ),
+                        SizedBox(height: 18.0),
+                        Container(
+                          width: double.infinity,
+                          height: 80.0,
+                          child: PageView.builder(
+                            controller: _controller,
+                            itemCount: onbeardList.length,
+                            onPageChanged: (int index) {
+                              setState(() {
+                                currentIndex = index;
+                              });
+                            },
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(children: [
                                 Text(
-                            onbeardList[index].title!,
+                                  onbeardList[index].title!,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: kLightFontColor,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(height: 24.0),
+                              ]);
+                            },
+                          ),
+                        ),
+                        Text(
+                          'plus de confusion sur  votre \n menu de repas',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 20,
-                                  color: kLightFontColor,
-                                  fontWeight: FontWeight.w700),
-                          ),
-                                        SizedBox(height: 24.0),
-                                        
-                                      ]
-                          );
-                         },
-                           
+                              fontSize: 13,
+                              color: kDarkGreyFontColor,
+                              fontWeight: FontWeight.w700),
                         ),
-                      
-                    ),
-                    Text(
-                      'plus de confusion sur  votre \n menu de repas',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                      fontSize: 13, color: kDarkGreyFontColor, fontWeight: FontWeight.w700),
-                    ),
-                    
-                  SizedBox(height: 28.0),
-
-                  GestureDetector(
-                    onTap: () {
-                      if (currentIndex == onbeardList.length - 1 ) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage(),),);
-                        }
-                      _controller!.nextPage(
-                          duration: Duration(milliseconds: 100),
-                          curve: Curves.bounceIn);
-                    } ,
-                    child: Container(
-                      height: 50,
-                      width: 230.0,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: kPrimaryColor,
-                        borderRadius: BorderRadius.circular(18.0),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(4, 4),
-                            blurRadius: 5.0,
-                           )
-                        ]
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                          currentIndex == onbeardList.length - 1 ? "continu" : "suivant" ,
-                          style: TextStyle(
-                            color: kDarkColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w800,
-                           )
+                        SizedBox(height: 28.0),
+                        GestureDetector(
+                          onTap: () {
+                            if (currentIndex == onbeardList.length - 1) {
+                              Navigator.pushReplacementNamed(
+                                  context, "/authWrapper");
+                            }
+                            _controller!.nextPage(
+                                duration: Duration(milliseconds: 100),
+                                curve: Curves.bounceIn);
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 230.0,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius: BorderRadius.circular(18.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(4, 4),
+                                    blurRadius: 5.0,
+                                  )
+                                ]),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                    currentIndex == onbeardList.length - 1
+                                        ? "continu"
+                                        : "suivant",
+                                    style: TextStyle(
+                                      color: kDarkColor,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                    )),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(left: 20),
+                                //   child: Image.asset('assets/icons/arrow.png'),
+                                // ),
+                              ],
+                            ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 20),
-                          //   child: Image.asset('assets/icons/arrow.png'),
-                          // ),
-                        ],
-                      )
-                     ),
+                        ),
+                      ],
+                    ),
                   ),
-                  ],
                 ),
-              ),
-            )
+              )
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Container BuilDot(int index, BuildContext context) {
+  Container builDot(int index, BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 10.0),
       height: 15.0,
-      width: currentIndex == index ?  30 : 10,
+      width: currentIndex == index ? 30 : 10,
       decoration: BoxDecoration(
         color: kPrimaryColor,
         borderRadius: BorderRadius.circular(32.0),

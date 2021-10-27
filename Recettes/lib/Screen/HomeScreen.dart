@@ -1,10 +1,11 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, sized_box_for_whitespace, avoid_unnecessary_containers, avoid_print, void_checks
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, sized_box_for_whitespace, avoid_unnecessary_containers, avoid_print, void_checks, no_logic_in_create_state
 
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:recette/Screen/ContentBottomNavigation/BodyPages.dart';
-import 'package:recette/Screen/DetailScreen.dart';
+
 import 'package:recette/Screen/ContentBottomNavigation/MenuPage.dart';
 import 'package:recette/Screen/ContentBottomNavigation/Recherche.dart';
 import 'package:recette/Screen/ContentBottomNavigation/SettingPages.dart';
@@ -29,7 +30,8 @@ class Meals {
 }
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final User? user;
+  const HomeScreen({Key? key, this.user}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -43,31 +45,30 @@ class _HomeScreenState extends State<HomeScreen> {
   // List<Meals> dinnerList =[];
   // bool? chargement;
 
-final List bottomNavigationPage = [
-  Body(),
-  SearchPages(),
-  MenuPage(),
-  SettingPages(),
-  
-];
-  
+  final List bottomNavigationPage = [
+    Body(
+      user: FirebaseAuth.instance.currentUser,
+    ),
+    SearchPages(),
+    MenuPage(),
+    SettingPages(),
+  ];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
- 
   }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.user); // les informations de l'utlisateur connecter
     return Scaffold(
       backgroundColor: kDarkColor,
       bottomNavigationBar: Container(
         height: 74.0,
         // padding: const EdgeInsets.only(top: 5),
         child: BottomNavigationBar(
-            
             backgroundColor: kBottomColor.withOpacity(.1),
             type: BottomNavigationBarType.fixed,
             elevation: 0.0,
@@ -77,36 +78,19 @@ final List bottomNavigationPage = [
             onTap: (index) {
               setState(() {
                 selectedIndex = index;
-
               });
             },
             items: [
-
               BuildBottomNavigationBarItem('assets/icons/acceuil.png', 0),
-
-
               BuildBottomNavigationBarItem('assets/icons/recherche.png', 1),
-
-
               BuildBottomNavigationBarItem('assets/icons/menu.png', 2),
-
-
               BuildBottomNavigationBarItem('assets/icons/paramètres.png', 3),
-
-
             ]),
       ),
-
-
-      body : IndexedStack(
-        index: selectedIndex,
-        children : <Widget> [... bottomNavigationPage]
-      ) ,
-
-
+      body: IndexedStack(
+          index: selectedIndex, children: <Widget>[...bottomNavigationPage]),
     );
   }
-
 
   BottomNavigationBarItem BuildBottomNavigationBarItem(
       String image, int index) {

@@ -5,17 +5,10 @@ import 'package:recette/Screen/LoginPage.dart';
 import 'package:recette/Screen/RegistrationPage.dart';
 import 'package:recette/constant.dart';
 
-import 'package:another_flushbar/flushbar.dart';
-import 'package:another_flushbar/flushbar_helper.dart';
-import 'package:another_flushbar/flushbar_route.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:http/http.dart';
-
 class LogRegistrePage extends StatefulWidget {
-  LogRegistrePage({Key? key, }) : super(key: key);
-
+  LogRegistrePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _LogRegistrePageState createState() => _LogRegistrePageState();
@@ -26,34 +19,40 @@ class _LogRegistrePageState extends State<LogRegistrePage> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: kPrimaryColor,
-    body: Column(
-      children: [
-        BuildRetour(context),
-        SizedBox(height:150.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
+      body: Column(
+        children: [
+          // buildRetour(context),
+          SizedBox(
+            height: 60,
+          ),
+          SizedBox(height: 150.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
                 "assets/images/timelogRegistre.png",
                 height: 200,
                 width: 200,
               ),
-          ],
-        ),
-        SizedBox(height:80.0),
+            ],
+          ),
+          SizedBox(height: 80.0),
 
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>RegistrationPage(),),);
-              },
-              child: FlateButton(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegistrationPage(),
+                    ),
+                  );
+                },
+                child: FlateButton(
                   contenu: Text(
                     "S'inscrire",
                     style: TextStyle(
@@ -62,10 +61,15 @@ class _LogRegistrePageState extends State<LogRegistrePage> {
                         color: kLightFontColor),
                   ),
                 ),
-            ),
+              ),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage(),),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(),
+                    ),
+                  );
                 },
                 child: FlateButton(
                   contenu: Text(
@@ -77,41 +81,41 @@ class _LogRegistrePageState extends State<LogRegistrePage> {
                   ),
                 ),
               ),
-          ],
-        )
-      ],
-    ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
-  Padding BuildRetour(BuildContext context) {
+  Padding buildRetour(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top:55.0,left: 32.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Row(
-            children: [
-              Icon(Icons.arrow_back_ios,
-                    size: 24.0,
-                  color: kDarkColor,
-                ),
-                Text(
-                  "Retour",
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w800,
-                    color: kDarkColor,
-                  ),
-                )
-            ],
-          ),
+      padding: const EdgeInsets.only(top: 55.0, left: 32.0),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: Row(
+          children: [
+            Icon(
+              Icons.arrow_back_ios,
+              size: 24.0,
+              color: kDarkColor,
+            ),
+            Text(
+              "Retour",
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.w800,
+                color: kDarkColor,
+              ),
+            )
+          ],
         ),
-      );
+      ),
+    );
   }
 }
-
 
 class FlateButton extends StatelessWidget {
   const FlateButton({Key? key, this.contenu}) : super(key: key);
@@ -119,17 +123,16 @@ class FlateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-              onPressed: null,
-              child: Container(
-                alignment: Alignment.center,
-                height: 60.0,
-                width: 145.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(32.0),
-                  color: kDarkColor.withOpacity(0.7)
-                ),
-                child:contenu,
-              ),
-          );
+      onPressed: null,
+      child: Container(
+        alignment: Alignment.center,
+        height: 60.0,
+        width: 145.0,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32.0),
+            color: kDarkColor.withOpacity(0.7)),
+        child: contenu,
+      ),
+    );
   }
 }

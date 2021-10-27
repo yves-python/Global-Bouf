@@ -1,8 +1,7 @@
-// ignore_for_file: non_constant_identifier_names, unused_local_variable
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, prefer_if_null_operators, avoid_print
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-
 
 class Authentification {
   var auth = FirebaseAuth.instance; // instantiation
@@ -11,9 +10,9 @@ class Authentification {
     return user != null ? user : null;
   }
 
-// etat de connection 
-  Stream<User?> get users{
-      return auth.authStateChanges().map(utilisateur);
+// etat de connection
+  Stream<User?> get users {
+    return auth.authStateChanges().map(utilisateur);
   }
 
   // fonction de connection
@@ -32,10 +31,19 @@ class Authentification {
   // fonction de dinscription
   Future inscription_Email_Pw(String email, String password) async {
     try {
-      UserCredential userCredential = await auth. createUserWithEmailAndPassword( 
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = userCredential.user; // recuperarion de l'utilisateur
       return utilisateur(user!);
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future deconnexion() async {
+    try {
+      await auth.signOut();
     } catch (e) {
       print(e.toString());
       return null;
